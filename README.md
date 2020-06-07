@@ -15,13 +15,13 @@
 
 - 效果图如下
 
-  <img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gfjwju38mhj30la18q7wh.jpg" alt="image-20200607182930849" style="zoom: 25%;" />
+  <img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gfjwju38mhj30la18q7wh.jpg" alt="image-20200607182930849"  />
 
   
 
 刷到广告
 
-<img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gfjwkl52b9j30la18qe81.jpg" alt="image-20200607183013978" style="zoom: 25%;" />
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gfjwkl52b9j30la18qe81.jpg" alt="image-20200607183013978"  />
 
 - 支持下拉刷新和上拉加载更多
 - 获取新闻的API每天上限100次，运行即崩溃可能是因为次数用完
