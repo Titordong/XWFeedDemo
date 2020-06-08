@@ -13,6 +13,9 @@
 #import "XWFeedNewsContainer.h"
 #import "XWFeedNewsViewCell.h"
 #import "XWFeedModel.h"
+#import "XWAdsModel.h"
+#import "XWBaseModel.h"
+#import "FactoryTableViewCell.h"
 
 @interface XWFeedDataSource()
 
@@ -32,13 +35,43 @@
 }
 
 - (void)loadNewsData{
+
+    XWFeedModel *temp = [[XWFeedModel alloc]init];
+    temp.uniquekey = @"2d48edd6706e5e0b6b8f513af0e5bf80";
+    temp.title = @"全球新冠肺炎COVID-19实时追踪，关注全球疫情动态";
+    temp.date = @"2020-06-08 15:56:27";
+    temp.category = @"头条";
+    temp.author_name = @"健康咨询";
+    temp.url = @"https://covid-19.juheapi.com/?s=toutiao";
+    temp.thumbnail_pic_s = @"https://juheimgs.oss-cn-beijing.aliyuncs.com/banner/202003/d8376e7e3010cc3f.png";
+    XWAdsModel *temp2 = [[XWAdsModel alloc]init];
+    temp2.adsImage = @"img_ads.jpg";
+    temp2.adsContent = @"618开业大酬宾，红烧鸡腿免费大放送！！！";
+    
+    /*写死的数据用来测试*/
+    
+//    for(int i=0;i<15;i++){
+//        XWBaseModel *obj;
+//        NSInteger index = rand()%5;// 1/5概率插入一条广告
+//        if(index < 1){
+//            obj = [temp2 copy];
+//        }
+//        else {
+//            obj = [temp copy];
+//        }
+//        [self.dataArray addObject:obj];
+//    }
+//    [self.delegate loadDataCompleted];
+//    return;
+    /*测试数据*/
+    
      dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
            [[TTNetworkManager shareInstance] requestForJSONWithURL:self.url params:nil method:@"GET" needCommonParams:NO callback:^(NSError *error, NSDictionary *jsonObj) {
                if ([jsonObj valueForKey:@"error_code"] != 0) {
                    [[[jsonObj valueForKey:@"result"] valueForKey:@"data"] enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL *_Nonnull stop) {
                        NSInteger index = rand()%5;// 1/5概率插入一条广告
                        if(index < 1){
-                           [self.dataArray addObject:[NSNull null]];
+                           [self.dataArray addObject:[temp2 copy]];
                        }
                        else {
                            [self.dataArray addObject:[XWFeedModel yy_modelWithDictionary:obj]];
@@ -55,21 +88,30 @@
 
 #pragma mark - UITableViewDataSource Method
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString *indentifer = @"mycell";
-    static NSString *ads = @"ads";
-    NSInteger type = 0;
-    if([[self.dataArray objectAtIndex:indexPath.row]class] == [NSNull class]){// 判断是否为广告cell
-        type = 1;
-    }
-    
-    XWFeedNewsViewCell *cell=[tableView dequeueReusableCellWithIdentifier:type == 1?ads:indentifer];
-    if(!cell){
-        cell=[[XWFeedNewsViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:type == 1?ads:indentifer];
-    }
+    XWBaseModel *model = self.dataArray[indexPath.row];
+    XWBaseCell *cell = [FactoryTableViewCell createTableViewCellWithModel:model tableView:tableView indexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    if(type == 0){
-        cell.newsData=self.dataArray[indexPath.row];
-    }
+    [cell setDataWithModel:model];
+    return cell;
+    
+    
+    
+//
+//    static NSString *indentifer = @"mycell";
+//    static NSString *ads = @"ads";
+//    NSInteger type = 0;
+//    if([[self.dataArray objectAtIndex:indexPath.row]class] == [NSNull class]){// 判断是否为广告cell
+//        type = 1;
+//    }
+//
+//    XWFeedNewsViewCell *cell=[tableView dequeueReusableCellWithIdentifier:type == 1?ads:indentifer];
+//    if(!cell){
+//        cell=[[XWFeedNewsViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:type == 1?ads:indentifer];
+//    }
+//    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//    if(type == 0){
+//        cell.newsData=self.dataArray[indexPath.row];
+//    }
     return cell;
 }
 

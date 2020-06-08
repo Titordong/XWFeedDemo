@@ -10,4 +10,15 @@
 
 @implementation XWFeedModel
 
+- (id)copyWithZone:(NSZone *)zone{
+    XWFeedModel *md = [[[self class]allocWithZone:zone]init];
+    md.uniquekey = self.uniquekey;
+    md.author_name = self.author_name;
+    md.category = self.category;
+    md.date = self.date;
+    md.thumbnail_pic_s = self.thumbnail_pic_s;
+    md.title = self.title;
+    md.url = self.url;
+    return md;
+}
 @end

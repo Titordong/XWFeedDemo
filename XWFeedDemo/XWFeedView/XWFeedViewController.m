@@ -31,7 +31,7 @@
 - (void) p_init{
     self.view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.searchView];
-    [self.view addSubview:self.categoryView];
+//    [self.view addSubview:self.categoryView];
     [self.view addSubview:self.feedView];
 }
 
@@ -53,7 +53,7 @@
 
 - (XWFeedNewsContainer *)feedView{
     if(!_feedView){
-        _feedView = [[XWFeedNewsContainer alloc]initWithFrame:CGRectMake(0, 65, self.view.frame.size.width, self.view.frame.size.height)];
+        _feedView = [[XWFeedNewsContainer alloc]initWithFrame:CGRectMake(0, 50, self.view.frame.size.width, self.view.frame.size.height)];
     }
     return _feedView;
 }

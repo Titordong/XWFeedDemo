@@ -6,13 +6,13 @@
 //  Copyright © 2020 xingwang dong. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "XWBaseCell.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @class XWFeedModel;
 
-@interface XWFeedNewsViewCell : UITableViewCell
+@interface XWFeedNewsViewCell : XWBaseCell
 
 @property (nonatomic, strong) XWFeedModel *newsData;
 

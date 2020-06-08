@@ -19,9 +19,6 @@
 @property (nonatomic,strong) UILabel *categoryLabel;
 @property (nonatomic,strong) UILabel *authorLabel;
 
-@property (nonatomic,strong) UIImageView *adsImageView;
-@property (nonatomic,strong) UILabel *adsContentLabel;
-
 @end
 
 @implementation XWFeedNewsViewCell
@@ -30,42 +27,22 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     self=[super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if(self){
-        if([reuseIdentifier compare:@"ads"] == NSOrderedSame){
-            [self p_initAds];
-            [self p_initLayoutAds];
-        }
-        else {
-            [self p_initSubviews];
-            [self p_layoutSubviews];
-        }
+        [self p_initSubviews];
+        [self p_layoutSubviews];
     }
     return self;
 }
 
-#pragma mark - Private Method
-- (void) p_initAds{
-    [self addSubview:self.adsImageView];
-    [self addSubview:self.adsContentLabel];
-    self.adsImageView.image = [UIImage imageNamed:@"img_ads.jpg"];
-    self.adsContentLabel.text = @"618开业大酬宾，红烧鸡腿免费大放送！！！";
+#pragma mark - Override Method
+- (void)setDataWithModel:(XWBaseModel *)model{
+    self.newsData = (XWFeedModel *) model;
 }
 
-- (void) p_initLayoutAds{
-    [self.adsImageView mas_makeConstraints:^(MASConstraintMaker *make){
-        make.top.equalTo(self).offset(0);
-        make.left.equalTo(self).offset(5);
-        make.bottom.equalTo(self).offset(0);
-        make.size.mas_equalTo(CGSizeMake(100, 100));
-    }];
-    
-    [self.adsContentLabel mas_makeConstraints:^(MASConstraintMaker *make){
-        make.top.equalTo(self).offset(0);
-        make.left.equalTo(self.adsImageView.mas_right).offset(10);
-        make.right.equalTo(self).offset(-5);
-        make.height.mas_equalTo(100);
-    }];
-}
+#pragma mark - Private Method
 - (void)p_initSubviews{
+    self.backgroundColor = [UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1];
+    self.layer.cornerRadius = 10;
+    self.clipsToBounds = YES;
     [self addSubview:self.thumbnailImageView];
     [self.thumbnailImageView addSubview:self.titleLabel];
     [self.thumbnailImageView addSubview:self.dateLabel];
@@ -77,7 +54,7 @@
     [self.thumbnailImageView mas_makeConstraints:^(MASConstraintMaker *make){
         make.top.equalTo(self).offset(0);
         make.left.equalTo(self).offset(0);
-        make.size.mas_equalTo(CGSizeMake(414, 260));
+        make.size.mas_equalTo(CGSizeMake(414, 287));
     }];
     
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make){
@@ -130,8 +107,9 @@
 - (UILabel *)titleLabel{
     if(!_titleLabel){
         _titleLabel = [[UILabel alloc]init];
-        _titleLabel.backgroundColor = [[UIColor whiteColor]colorWithAlphaComponent:0.25];
-//        _titleLabel.textColor=[UIColor whiteColor];
+        _titleLabel.backgroundColor = [[UIColor whiteColor]colorWithAlphaComponent:0.5];
+        _titleLabel.layer.cornerRadius = 5;
+        _titleLabel.clipsToBounds = YES;
         _titleLabel.font = [UIFont systemFontOfSize:18];
         _titleLabel.numberOfLines = 0;
     }
@@ -141,7 +119,9 @@
 - (UILabel *)dateLabel{
     if(!_dateLabel){
         _dateLabel = [[UILabel alloc]init];
-        _dateLabel.backgroundColor = [[UIColor whiteColor]colorWithAlphaComponent:0.25];
+        _dateLabel.backgroundColor = [[UIColor whiteColor]colorWithAlphaComponent:0.5];
+        _dateLabel.layer.cornerRadius = 2;
+        _dateLabel.clipsToBounds = YES;
 //        _dateLabel.textColor=[UIColor whiteColor];
         _dateLabel.font = [UIFont systemFontOfSize:12];
     }
@@ -162,22 +142,6 @@
         _authorLabel.font = [UIFont systemFontOfSize:12];
     }
     return _authorLabel;
-}
-
-- (UIImageView *)adsImageView{
-    if(!_adsImageView){
-        _adsImageView = [[UIImageView alloc]init];
-    }
-    return _adsImageView;
-}
-
-- (UILabel *)adsContentLabel{
-    if(!_adsContentLabel){
-        _adsContentLabel = [[UILabel alloc]init];
-        _adsContentLabel.font = [UIFont systemFontOfSize:16];
-        _adsContentLabel.numberOfLines = 0;
-    }
-    return _adsContentLabel;
 }
 
 - (void)awakeFromNib {

@@ -7,10 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "XWBaseModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface XWFeedModel : NSObject
+@interface XWFeedModel : XWBaseModel<NSCopying>
 
 @property (nonatomic,copy) NSString *uniquekey;
 @property (nonatomic,copy) NSString *title;

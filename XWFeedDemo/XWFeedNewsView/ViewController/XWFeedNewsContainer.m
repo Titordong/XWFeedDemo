@@ -11,6 +11,8 @@
 #import "XWFeedNewsViewCell.h"
 #import "XWFeedModel.h"
 #import "MJRefresh.h"
+#import "XWAdsModel.h"
+#import "XWAdsNewsViewCell.h"
 
 @interface XWFeedNewsContainer()
 
@@ -66,7 +68,10 @@
     if(!_tableView){
         _tableView = [[UITableView alloc]initWithFrame:self.frame];
         _tableView.dataSource = self.dataSource;
-//        _tableView.rowHeight=300;
+
+        [_tableView registerClass:[XWAdsNewsViewCell class] forCellReuseIdentifier:@"XWAdsModel"];
+        [_tableView registerClass:[XWFeedNewsViewCell class] forCellReuseIdentifier:@"XWFeedModel"];
+   
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
         _tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMore)];
