@@ -16,6 +16,10 @@
 #import "XWAdsModel.h"
 #import "XWBaseModel.h"
 #import "FactoryTableViewCell.h"
+#import "FactoryCollectionViewCell.h"
+#import "XWAdsCollectionViewCell.h"
+#import "XWFeedNewsCollectionViewCell.h"
+#import "XWCollectionBaseCell.h"
 
 @interface XWFeedDataSource()
 
@@ -93,32 +97,26 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     [cell setDataWithModel:model];
     return cell;
-    
-    
-    
-//
-//    static NSString *indentifer = @"mycell";
-//    static NSString *ads = @"ads";
-//    NSInteger type = 0;
-//    if([[self.dataArray objectAtIndex:indexPath.row]class] == [NSNull class]){// 判断是否为广告cell
-//        type = 1;
-//    }
-//
-//    XWFeedNewsViewCell *cell=[tableView dequeueReusableCellWithIdentifier:type == 1?ads:indentifer];
-//    if(!cell){
-//        cell=[[XWFeedNewsViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:type == 1?ads:indentifer];
-//    }
-//    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//    if(type == 0){
-//        cell.newsData=self.dataArray[indexPath.row];
-//    }
-    return cell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.dataArray.count;
 }
 
+#pragma mark - UICollectionDataSource Method
+- (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    XWBaseModel *model = self.dataArray[indexPath.row];
+    XWCollectionBaseCell *cell = [FactoryCollectionViewCell createCollectionViewCellWithModel:model collectionView:collectionView indexPath:indexPath];
+    [cell setDataWithModel:model];
+    return cell;
+}
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
+    return 1;
+}
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    return [self.dataArray count];
+}
 #pragma mark - Private Method
 
 - (void) p_init{

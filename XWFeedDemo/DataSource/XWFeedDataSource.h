@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface XWFeedDataSource : NSObject<UITableViewDataSource>
+@interface XWFeedDataSource : NSObject<UITableViewDataSource,UICollectionViewDataSource>
 
 @property (nonatomic,strong)NSMutableArray *dataArray;
 @property (nonatomic,weak)id<XWNewsDataSourceDelegate>delegate;

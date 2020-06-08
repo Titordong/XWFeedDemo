@@ -1,5 +1,5 @@
 //
-//  XWBaseCell.h
+//  XWCollectionBaseCell.h
 //  FeedDemo
 //
 //  Created by bytedance on 2020/6/8.
@@ -11,10 +11,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface XWBaseCell : UITableViewCell
+@interface XWCollectionBaseCell : UICollectionViewCell
 
 - (void)setDataWithModel:(XWBaseModel *)model;
-- (instancetype)initWithFrame:(CGRect)frame;
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier;
+
 
 @end
 

@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface FactoryTableViewCell : NSObject
 
-+ (XWBaseModel *) createTableViewCellWithModel:(XWBaseModel *)model tableView:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath;
++ (XWBaseCell *) createTableViewCellWithModel:(XWBaseModel *)model tableView:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath;
 
 @end
 

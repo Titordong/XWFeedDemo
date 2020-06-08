@@ -10,6 +10,7 @@
 #import "XWSearchView.h"
 #import "XWCategoryContainer.h"
 #import "XWFeedViewController.h"
+#import "XWCollectionFeedNewsController.h"
 
 @interface SceneDelegate ()
 
@@ -26,7 +27,10 @@
     UITabBarController *tabbarController = [[UITabBarController alloc] init];
     XWFeedViewController *feed = [[XWFeedViewController alloc]init];
     feed.title = @"首页";
-    tabbarController.viewControllers = @[feed];
+    
+    XWCollectionFeedNewsController *feed2 = [[XWCollectionFeedNewsController alloc]init];
+    feed2.title = @"第二页";
+    tabbarController.viewControllers = @[feed,feed2];
     [_window setRootViewController:tabbarController];
     [_window makeKeyAndVisible];
     

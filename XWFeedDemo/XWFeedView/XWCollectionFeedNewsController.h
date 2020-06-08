@@ -1,5 +1,5 @@
 //
-//  XWBaseCell.h
+//  XWCollectionFeedNewsController.h
 //  FeedDemo
 //
 //  Created by bytedance on 2020/6/8.
@@ -7,14 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "XWBaseModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface XWBaseCell : UITableViewCell
-
-- (void)setDataWithModel:(XWBaseModel *)model;
-- (instancetype)initWithFrame:(CGRect)frame;
+@interface XWCollectionFeedNewsController : UIViewController
 
 @end
 
