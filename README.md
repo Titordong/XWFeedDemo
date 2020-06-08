@@ -1,7 +1,7 @@
 # XWFeedDemo
 ### 简介
 
-简单实现UITableView的一个小demo
+简单实现UITableView的一个小demo,Github的图片预览有Bug，还未解决
 
 ### 配置pod
 
